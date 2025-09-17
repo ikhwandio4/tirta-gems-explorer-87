@@ -18,9 +18,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const navigation = [
     { name: 'Beranda', href: '/' },
-    { name: 'Destinasi', href: '/destinations' },
+    { name: 'Lokasi Wisata', href: '/destinations' },
     { name: 'Tentang Kami', href: '/about' },
     { name: 'Kontak', href: '/contact' },
   ];

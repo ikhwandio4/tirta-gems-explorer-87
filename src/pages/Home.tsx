@@ -1,5 +1,6 @@
 import React from 'react';
 import HeroCarousel from '@/components/HeroCarousel';
+import InteractiveMap from '@/components/InteractiveMap';
 import DestinationCard from '@/components/DestinationCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -87,6 +88,9 @@ const Home = () => {
       {/* Hero Section with Carousel */}
       <HeroCarousel />
 
+      {/* Interactive Map Section */}
+      <InteractiveMap />
+
       {/* Stats Section */}
       <section className="py-16 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -147,19 +151,20 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <Badge variant="secondary" className="mb-4">
-                Tentang Jasa Tirta
+                Tentang Hotel Selorejo
               </Badge>
               <h2 className="text-4xl font-bold text-primary mb-6">
-                Komitmen untuk Pariwisata Berkelanjutan
+                Pengalaman Menginap di Tengah Keindahan Alam
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Selama lebih dari 20 tahun, Jasa Tirta telah berkomitmen untuk menghadirkan 
-                pengalaman wisata air yang tak terlupakan sambil menjaga kelestarian alam 
-                dan memberdayakan masyarakat lokal.
+                Hotel Selorejo menawarkan pengalaman menginap yang tak terlupakan dengan 
+                pemandangan danau yang memukau dan udara pegunungan yang sejuk. Terletak 
+                strategis di kawasan wisata Selorejo yang terkenal dengan keindahan alamnya.
               </p>
               <p className="text-lg text-muted-foreground mb-8">
-                Kami mengelola 7 destinasi wisata air unggulan yang menawarkan keindahan 
-                alam, fasilitas modern, dan pelayanan terbaik untuk seluruh keluarga.
+                Nikmati kenyamanan akomodasi modern dengan akses langsung ke berbagai 
+                destinasi wisata air terbaik, fasilitas lengkap, dan pelayanan prima 
+                untuk menjadikan liburan Anda istimewa.
               </p>
               <Button size="lg" className="btn-hero">
                 Pelajari Lebih Lanjut
