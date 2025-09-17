@@ -101,23 +101,44 @@ const HeroCarousel = () => {
               className="h-full bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url(${destination.image})` }}
             >
-              <div className="hero-overlay" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
               
-              {/* Content */}
-              <div className="relative z-10 h-full flex items-center justify-center">
-                <div className="text-center text-white px-4 max-w-4xl">
-                  <h1 className="text-5xl md:text-7xl font-bold mb-6 fade-in">
-                    {destination.name}
-                  </h1>
-                  <p className="text-xl md:text-2xl mb-4 text-accent slide-up">
-                    {destination.tagline}
-                  </p>
-                  <p className="text-lg mb-8 max-w-2xl mx-auto slide-up">
-                    {destination.description}
-                  </p>
-                  <Button className="btn-explore text-lg px-8 py-4">
-                    Jelajahi Sekarang
-                  </Button>
+              {/* Content - Wonderful Indonesia Style */}
+              <div className="relative z-10 h-full flex items-center">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                  <div className="max-w-3xl">
+                    {/* Destination Badge */}
+                    <div className="inline-flex items-center bg-white/10 backdrop-blur-md rounded-full px-6 py-2 mb-6">
+                      <span className="text-white text-sm font-semibold tracking-wide uppercase">
+                        Hotel Selorejo Experience
+                      </span>
+                    </div>
+                    
+                    {/* Main Title */}
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                      <span className="block">{destination.name}</span>
+                    </h1>
+                    
+                    {/* Tagline */}
+                    <p className="text-xl md:text-2xl text-white/90 mb-4 font-light">
+                      {destination.tagline}
+                    </p>
+                    
+                    {/* Description */}
+                    <p className="text-lg text-white/80 mb-8 max-w-2xl leading-relaxed">
+                      {destination.description}
+                    </p>
+                    
+                    {/* CTA Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Button className="bg-white text-primary hover:bg-white/90 px-8 py-4 text-lg font-semibold rounded-full shadow-2xl hover:shadow-white/20 transition-all duration-300">
+                        Booking Sekarang
+                      </Button>
+                      <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-4 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300">
+                        Jelajahi Lokasi
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
