@@ -16,14 +16,14 @@
     --popover: 0 0% 100%;
     --popover-foreground: 228 25% 31%;
 
-    --primary: 228 25% 31%; /* #4B4E6D - Dark Slate */
+    --primary: 200 30% 25%; /* Mountain slate - darker, more sophisticated */
     --primary-foreground: 210 20% 98%;
 
-    --secondary: 189 25% 50%; /* #6A8D92 - Teal */
+    --secondary: 150 35% 40%; /* Forest green - natural, calming */
     --secondary-foreground: 0 0% 100%;
 
-    --accent: 189 35% 85%; /* Light Teal */
-    --accent-foreground: 228 25% 31%;
+    --accent: 35 75% 60%; /* Warm sunset orange - welcoming */
+    --accent-foreground: 200 30% 15%;
 
     --muted: 210 20% 96%;
     --muted-foreground: 215 16% 47%;
