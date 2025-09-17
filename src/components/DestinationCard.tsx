@@ -48,40 +48,36 @@ const DestinationCard: React.FC<DestinationCardProps> = ({
 
       {/* Content */}
       <div className="p-6">
-        <div className="flex items-start justify-between mb-2">
-          <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+        <div className="flex items-start justify-between mb-3">
+          <h3 className="text-slate-900 dark:text-white font-bold text-xl leading-tight group-hover:text-slate-700 dark:group-hover:text-slate-200 transition-colors">
             {name}
           </h3>
           <div className="flex items-center space-x-1">
-            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-            <span className="text-sm font-medium">{rating}</span>
+            <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+            <span className="text-sm font-bold text-slate-900 dark:text-white">{rating}</span>
           </div>
         </div>
 
-        <div className="flex items-center text-muted-foreground mb-3">
-          <MapPin className="h-4 w-4 mr-1" />
-          <span className="text-sm">{location}</span>
+        <div className="flex items-center mb-4">
+          <MapPin className="h-4 w-4 mr-2 text-slate-500 dark:text-slate-400" />
+          <span className="text-sm font-medium text-slate-600 dark:text-slate-300">{location}</span>
         </div>
 
-        <div className="flex flex-wrap gap-1 mb-4">
+        <div className="flex flex-wrap gap-2 mb-6">
           {facilities.slice(0, 3).map((facility, index) => (
-            <Badge key={index} variant="outline" className="text-xs">
+            <Badge key={index} variant="outline" className="text-xs font-medium border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200">
               {facility}
             </Badge>
           ))}
           {facilities.length > 3 && (
-            <Badge variant="outline" className="text-xs">
+            <Badge variant="outline" className="text-xs font-medium border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200">
               +{facilities.length - 3} lainnya
             </Badge>
           )}
         </div>
 
-        <div className="flex items-center justify-between">
-          <div>
-            <span className="text-sm text-muted-foreground">Mulai dari</span>
-            <p className="text-lg font-bold text-primary">{price}</p>
-          </div>
-          <Button className="btn-explore">
+        <div className="flex justify-end">
+          <Button className="btn-explore w-full">
             Lihat Detail
           </Button>
         </div>
