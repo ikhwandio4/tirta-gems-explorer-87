@@ -2,41 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Jasa Tirta Tourism Design System - Water & Nature Inspired */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Primary Colors - Dark Slate & Teal Theme */
+    --background: 210 20% 98%;
+    --foreground: 228 25% 31%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 228 25% 31%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 228 25% 31%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 228 25% 31%; /* #4B4E6D - Dark Slate */
+    --primary-foreground: 210 20% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 189 25% 50%; /* #6A8D92 - Teal */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 189 35% 85%; /* Light Teal */
+    --accent-foreground: 228 25% 31%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 189 25% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Tourism Specific Colors */
+    --hero-overlay: 228 25% 31% / 0.7;
+    --water-blue: 200 85% 60%;
+    --nature-green: 145 40% 45%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--accent)));
+    --gradient-water: linear-gradient(180deg, hsl(200 85% 60%), hsl(189 25% 50%));
+    
+    /* Shadows */
+    --shadow-card: 0 10px 30px -10px hsl(var(--primary) / 0.1);
+    --shadow-hover: 0 20px 40px -10px hsl(var(--primary) / 0.15);
+    --shadow-hero: 0 0 60px hsl(var(--secondary) / 0.3);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +114,110 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer components {
+  /* Hero Components */
+  .hero-section {
+    @apply relative min-h-screen bg-gradient-to-br from-primary to-secondary;
+  }
+  
+  .hero-overlay {
+    @apply absolute inset-0 bg-black/30;
+  }
+  
+  /* Card Components */
+  .destination-card {
+    @apply relative overflow-hidden rounded-xl bg-card shadow-[var(--shadow-card)] 
+           transition-all duration-300 hover:shadow-[var(--shadow-hover)] hover:scale-105;
+  }
+  
+  .destination-card-image {
+    @apply aspect-[4/3] w-full object-cover transition-transform duration-500;
+  }
+  
+  .destination-card:hover .destination-card-image {
+    @apply scale-110;
+  }
+  
+  /* Button Variants */
+  .btn-hero {
+    @apply bg-secondary text-secondary-foreground px-8 py-4 rounded-lg font-semibold 
+           hover:bg-secondary/90 transition-all duration-300 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-explore {
+    @apply bg-gradient-to-r from-water-blue to-secondary text-white px-6 py-3 
+           rounded-lg font-medium hover:from-water-blue/90 hover:to-secondary/90 
+           transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+  
+  /* Navigation */
+  .nav-link {
+    @apply relative text-primary-foreground hover:text-accent transition-colors duration-300
+           after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 
+           after:bg-accent after:transition-all after:duration-300 hover:after:w-full;
+  }
+  
+  /* Animations */
+  .fade-in {
+    @apply animate-[fadeIn_0.6s_ease-out];
+  }
+  
+  .slide-up {
+    @apply animate-[slideUp_0.8s_ease-out];
+  }
+}
+
+@layer utilities {
+  /* Custom Gradients */
+  .bg-hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-card-gradient {
+    background: var(--gradient-card);
+  }
+  
+  .bg-water-gradient {
+    background: var(--gradient-water);
+  }
+  
+  /* Custom Shadows */
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-hover {
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .shadow-hero {
+    box-shadow: var(--shadow-hero);
+  }
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
