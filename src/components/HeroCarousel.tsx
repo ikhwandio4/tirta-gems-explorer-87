@@ -14,50 +14,50 @@ import wlingiLodoyo from '@/assets/wlingi-lodoyo.jpg';
 const destinations = [
   {
     id: 1,
-    name: 'Exotic Selorejo',
-    tagline: 'Keindahan Danau yang Memukau',
+    name: 'Selorejo',
+    tagline: 'The Stunning Selorejo Lake',
     image: selorejo,
     description: 'Nikmati ketenangan dan keindahan alam di danau Selorejo'
   },
   {
     id: 2,
-    name: 'Beautiful Karangkates',
-    tagline: 'Bendungan Spektakuler',
+    name: 'Karangkates',
+    tagline: 'Spectacular Dam Panorama',
     image: karangkates,
     description: 'Pesona bendungan dengan pemandangan yang menakjubkan'
   },
   {
     id: 3,
-    name: 'Amazing Wisata Lahor',
-    tagline: 'Wahana Air Terlengkap',
+    name: 'Lahor',
+    tagline: 'Water Adventure Paradise',
     image: lahor,
     description: 'Serunya bermain air dengan fasilitas modern'
   },
   {
     id: 4,
-    name: 'Taman Wisata Waduk Selorejo',
-    tagline: 'Rekreasi Keluarga Ideal',
+    name: 'Taman Selorejo',
+    tagline: 'Family Recreation Haven',
     image: tamanSelorejo,
     description: 'Tempat wisata yang sempurna untuk keluarga'
   },
   {
     id: 5,
     name: 'Waduk Bening',
-    tagline: 'Kejernihan Air Alami',
+    tagline: 'Crystal Clear Waters',
     image: bening,
     description: 'Air jernih seperti kristal di tengah alam'
   },
   {
     id: 6,
-    name: 'Taman Wisata Waruturi',
-    tagline: 'Ekosistem Lahan Basah',
+    name: 'Waruturi',
+    tagline: 'Wetland Ecosystem Wonders',
     image: waruturi,
     description: 'Wisata edukasi alam yang mempesona'
   },
   {
     id: 7,
-    name: 'Taman Wisata Wlingi-Lodoyo',
-    tagline: 'Danau Kembar Eksotis',
+    name: 'Wlingi-Lodoyo',
+    tagline: 'Twin Lakes Experience',
     image: wlingiLodoyo,
     description: 'Keajaiban dua danau yang saling terhubung'
   }
@@ -65,58 +65,81 @@ const destinations = [
 
 const HeroCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % destinations.length);
-    }, 5000);
+      if (!isAnimating) {
+        setIsAnimating(true);
+        setCurrentSlide((prev) => (prev + 1) % destinations.length);
+        setTimeout(() => setIsAnimating(false), 1000);
+      }
+    }, 8000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isAnimating]);
 
   const nextSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
     setCurrentSlide((prev) => (prev + 1) % destinations.length);
+    setTimeout(() => setIsAnimating(false), 1000);
   };
 
   const prevSlide = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
     setCurrentSlide((prev) => (prev - 1 + destinations.length) % destinations.length);
+    setTimeout(() => setIsAnimating(false), 1000);
   };
 
   const goToSlide = (index: number) => {
+    if (isAnimating || index === currentSlide) return;
+    setIsAnimating(true);
     setCurrentSlide(index);
+    setTimeout(() => setIsAnimating(false), 1000);
   };
 
   return (
-    <div className="relative h-screen overflow-hidden">
+    <div className="relative h-screen w-full overflow-hidden">
       {/* Slides */}
-      <div className="relative h-full">
+      <div className="relative h-full w-full">
         {destinations.map((destination, index) => (
           <div
             key={destination.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            className={`absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out ${
+              index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
             }`}
+            style={{ zIndex: index === currentSlide ? 1 : 0 }}
           >
-            <div
-              className="h-full bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${destination.image})` }}
-            >
-              <div className="hero-overlay" />
-              
-              {/* Content */}
-              <div className="relative z-10 h-full flex items-center justify-center">
-                <div className="text-center text-white px-4 max-w-4xl">
-                  <h1 className="text-5xl md:text-7xl font-bold mb-6 fade-in">
-                    {destination.name}
-                  </h1>
-                  <p className="text-xl md:text-2xl mb-4 text-accent slide-up">
-                    {destination.tagline}
-                  </p>
-                  <p className="text-lg mb-8 max-w-2xl mx-auto slide-up">
-                    {destination.description}
-                  </p>
-                  <Button className="btn-explore text-lg px-8 py-4">
-                    Jelajahi Sekarang
+            {/* Full-screen image */}
+            <img 
+              src={destination.image} 
+              alt={destination.name} 
+              className="w-full h-full object-cover"
+            />
+            
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/40" />
+            
+            {/* Content */}
+            <div className="absolute inset-0 flex flex-col justify-center items-center z-10">
+              <div className="text-center text-white px-4 max-w-5xl">
+                <h2 className="text-xl md:text-2xl font-medium mb-4 opacity-90 tracking-wide">
+                  THE MAGNIFICENT
+                </h2>
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight fade-in">
+                  {destination.tagline}
+                </h1>
+                <p className="text-xl md:text-2xl mb-10 max-w-2xl mx-auto opacity-90 slide-up">
+                  {destination.description}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button size="lg" className="bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm border border-white/20 px-8">
+                    Explore Now
+                  </Button>
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 px-8">
+                    Watch Video
                   </Button>
                 </div>
               </div>
@@ -125,31 +148,41 @@ const HeroCarousel = () => {
         ))}
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows - More subtle */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all duration-300"
+        className="absolute left-6 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300"
+        disabled={isAnimating}
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all duration-300"
+        className="absolute right-6 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300"
+        disabled={isAnimating}
       >
         <ChevronRight className="h-6 w-6" />
       </button>
 
-      {/* Dots Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
-        {destinations.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-accent scale-125' : 'bg-white/50 hover:bg-white/75'
-            }`}
-          />
-        ))}
+      {/* Location indicator like the reference - bottom center */}
+      <div className="absolute bottom-10 left-0 right-0 z-20">
+        <div className="flex justify-center items-center">
+          <div className="bg-black/30 backdrop-blur-sm px-6 py-3 rounded-full flex gap-4 md:gap-8">
+            {destinations.map((destination, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`transition-all duration-300 text-sm md:text-base ${
+                  index === currentSlide 
+                    ? 'text-white font-medium' 
+                    : 'text-white/60 hover:text-white/80'
+                }`}
+              >
+                {destination.name}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
